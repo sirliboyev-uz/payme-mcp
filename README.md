@@ -3,8 +3,8 @@
 MCP server for **[Payme](https://payme.uz)** — the leading payment system in Uzbekistan. Enables AI agents (Claude, GPT, Cursor, etc.) to process payments, manage cards, and generate checkout links through the Model Context Protocol.
 
 <p align="center">
+  <img src="https://img.shields.io/npm/v/payme-mcp" alt="npm version">
   <img src="https://img.shields.io/badge/MCP-compatible-blue" alt="MCP Compatible">
-  <img src="https://img.shields.io/badge/python-3.10+-blue" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License">
 </p>
 
@@ -29,45 +29,32 @@ Stripe, PayPal, and Square all have MCP servers. **Payme didn't — until now.**
 
 ## Quick Start
 
-### Install
+**Zero install — just run with npx:**
 
 ```bash
-pip install payme-mcp
+PAYME_ID=your_id PAYME_KEY=your_key npx payme-mcp
 ```
 
-Or with [uv](https://docs.astral.sh/uv/):
+Or install globally:
 
 ```bash
-uv pip install payme-mcp
+npm install -g payme-mcp
 ```
 
-### Configure
-
-Get your credentials from [merchant.paycom.uz](https://merchant.paycom.uz):
-
-```bash
-export PAYME_ID="your_merchant_id"
-export PAYME_KEY="your_merchant_key"
-export PAYME_TEST="true"  # optional: use sandbox
-```
-
-### Run
-
-```bash
-payme-mcp
-```
+Get your credentials from [merchant.paycom.uz](https://merchant.paycom.uz).
 
 ## Integration
 
 ### Claude Desktop
 
-Add to your `claude_desktop_config.json`:
+Add to `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
     "payme": {
-      "command": "payme-mcp",
+      "command": "npx",
+      "args": ["-y", "payme-mcp"],
       "env": {
         "PAYME_ID": "your_merchant_id",
         "PAYME_KEY": "your_merchant_key",
@@ -80,13 +67,14 @@ Add to your `claude_desktop_config.json`:
 
 ### Claude Code
 
-Add to your `.mcp.json`:
+Add to `.mcp.json`:
 
 ```json
 {
   "mcpServers": {
     "payme": {
-      "command": "payme-mcp",
+      "command": "npx",
+      "args": ["-y", "payme-mcp"],
       "env": {
         "PAYME_ID": "your_merchant_id",
         "PAYME_KEY": "your_merchant_key",
@@ -97,14 +85,15 @@ Add to your `.mcp.json`:
 }
 ```
 
-### Cursor / VS Code
+### Cursor / VS Code / Windsurf
 
 Add to MCP settings:
 
 ```json
 {
   "payme": {
-    "command": "payme-mcp",
+    "command": "npx",
+    "args": ["-y", "payme-mcp"],
     "env": {
       "PAYME_ID": "your_merchant_id",
       "PAYME_KEY": "your_merchant_key"
@@ -128,6 +117,14 @@ Once connected, your AI agent can:
 
 **Cancel a payment:**
 > "Cancel receipt 63abc... and notify the customer"
+
+## Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `PAYME_ID` | Yes | Your Payme merchant ID |
+| `PAYME_KEY` | Yes | Your Payme merchant key |
+| `PAYME_TEST` | No | Set to `true` for sandbox mode |
 
 ## Amount Format
 
@@ -154,7 +151,8 @@ Payme uses **tiyin** (1 UZS = 100 tiyin):
 ```bash
 git clone https://github.com/sirliboyev-uz/payme-mcp.git
 cd payme-mcp
-uv venv && uv pip install -e ".[dev]"
+npm install
+npm run build
 ```
 
 ## Security
@@ -172,7 +170,7 @@ MIT — see [LICENSE](LICENSE)
 
 - [Payme Developer Docs](https://developer.paycom.uz)
 - [MCP Protocol](https://modelcontextprotocol.io)
-- [FastMCP](https://github.com/jlowin/fastmcp)
+- [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
 
 ---
 
