@@ -27,23 +27,11 @@ Stripe, PayPal, and Square all have MCP servers. **Payme didn't — until now.**
 | `receipts_check` | Check receipt status |
 | `checkout_url` | Generate a Payme checkout payment link |
 
-## Quick Start
+## Setup
 
-**Zero install — just run with npx:**
+**No install needed.** Just add the config to your AI tool and it works automatically.
 
-```bash
-PAYME_ID=your_id PAYME_KEY=your_key npx payme-mcp
-```
-
-Or install globally:
-
-```bash
-npm install -g payme-mcp
-```
-
-Get your credentials from [merchant.paycom.uz](https://merchant.paycom.uz).
-
-## Integration
+Get your credentials from [merchant.paycom.uz](https://merchant.paycom.uz), then pick your tool:
 
 ### Claude Desktop
 
@@ -67,7 +55,7 @@ Add to `claude_desktop_config.json`:
 
 ### Claude Code
 
-Add to `.mcp.json`:
+Add to `.mcp.json` in your project root:
 
 ```json
 {
@@ -101,6 +89,8 @@ Add to MCP settings:
   }
 }
 ```
+
+That's it. `npx` downloads and runs the server automatically — no `npm install` needed.
 
 ## Usage Examples
 
